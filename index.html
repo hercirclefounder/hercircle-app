@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HerCircle | Find Your People</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff8fc;
+      color: #39243a;
+    }
+    header {
+      background: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 12px #efdbe8;
+    }
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #b53c86;
+    }
+    .tag {
+      font-size: 12px;
+      color: #865c79;
+    }
+    .hero {
+      padding: 55px 22px;
+      text-align: center;
+      background: linear-gradient(135deg, #ffe1f1, #f0e6ff);
+    }
+    .hero h1 {
+      font-size: 37px;
+      margin-bottom: 14px;
+    }
+    .hero p {
+      font-size: 17px;
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto 25px;
+    }
+    button {
+      border: none;
+      background: #b53c86;
+      color: white;
+      padding: 14px 23px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    section { padding: 30px 20px; }
+    h2 { text-align: center; }
+    .cards {
+      display: grid;
+      gap: 16px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 4px 18px #eadce5;
+    }
+    .card h3 { color: #a82e78; }
+    .card p { line-height: 1.5; }
+    .card button { margin-top: 8px; }
+    .notice {
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #6b5266;
+    }
+    footer {
+      text-align: center;
+      background: #f6ddea;
+      padding: 25px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">HerCircle ♡</div>
+    <div class="tag">Friendship. Freedom. Belonging.</div>
+  </header>
+
+  <div class="hero">
+    <h1>Your Life.<br>Your Choices.<br>Your Circle.</h1>
+    <p>
+      A welcoming friendship community for adult
+      single women. Meet like-minded women,
+      build meaningful friendships, and find
+      your people.
+    </p>
+    <button onclick="explore()">Explore Circles</button>
+  </div>
+
+  <section id="circles">
+    <h2>Find Your Circle 💗</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>🌸 New in the City</h3>
+        <p>Make friends and explore your city together.</p>
+        <button onclick="join('New in the City')">
+          Join Circle
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>☕ Coffee & Conversations</h3>
+        <p>Find women who love meaningful conversations.</p>
+        <button onclick="join('Coffee & Conversations')">
+          Join Circle
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>✨ Single by Choice</h3>
+        <p>Celebrate independence and different life paths.</p>
+        <button onclick="join('Single by Choice')">
+          Join Circle
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>🦋 New Beginnings</h3>
+        <p>A supportive space for women starting a new chapter.</p>
+        <button onclick="join('New Beginnings')">
+          Join Circle
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="notice">
+    <h2>Built Around Trust</h2>
+    <p>
+      Respect, privacy and meaningful friendships
+      come first.
+    </p>
+    <p>
+      This is an early demonstration.
+      Membership, verification and messaging
+      are not yet available.
+    </p>
+  </section>
+
+  <footer>
+    HerCircle ♡<br>
+    A place to belong, exactly as you are.<br>
+    © 2026 HerCircle
+  </footer>
+
+  <script>
+    function explore() {
+      document.getElementById("circles")
+        .scrollIntoView({ behavior: "smooth" });
+    }
+
+    function join(circle) {
+      alert(
+        "Welcome to " + circle +
+        "! Circle registration is coming soon."
+      );
+    }
+  </script>
+</body>
+</html>
