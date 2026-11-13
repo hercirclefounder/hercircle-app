@@ -3,73 +3,208 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HerCircle | Join Us</title>
+
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#fff4f5;
-  color:#39243a;
+* {
+  box-sizing: border-box;
 }
-header{
-  background:white;
-  padding:20px;
-  color:#b52c70;
-  font-size:25px;
-  font-weight:bold;
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff4f7;
+  color: #39243a;
 }
-main{
-  max-width:440px;
-  margin:35px auto;
-  padding:25px;
+
+header {
+  background: white;
+  padding: 22px;
+  color: #a83270;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
 }
-.card{
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 5px 20px #00000010;
+
+main {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
 }
-h1{text-align:center;color:#a52a68}
-p{text-align:center;color:#766477}
-.tabs{display:flex;gap:10px;margin:25px 0}
-.tabs button{
-  flex:1;padding:12px;border:0;
-  border-radius:25px;background:#f6e3ed;
-  color:#87345e;font-weight:bold;
+
+.card {
+  background: white;
+  padding: 30px 24px;
+  border-radius: 28px;
+  box-shadow: 0 8px 30px rgba(100,40,70,.06);
 }
-.tabs button.active{background:#b52c70;color:white}
-label{display:block;margin:15px 0 6px;font-size:14px}
-input{
-  width:100%;padding:13px;
-  border:1px solid #e5cbd8;
-  border-radius:10px;font-size:16px;
+
+h1 {
+  text-align: center;
+  color: #a83270;
+  font-size: 36px;
+  margin: 10px 0;
 }
-.check{display:flex;gap:10px;align-items:flex-start;font-size:13px;margin:18px 0}
-.check input{width:auto;margin-top:2px}
-.submit{
-  width:100%;padding:14px;border:0;
-  border-radius:25px;background:#b52c70;
-  color:white;font-size:16px;font-weight:bold;
+
+.tagline {
+  text-align: center;
+  color: #806b7d;
+  margin: 20px 0 30px;
+  line-height: 1.6;
 }
-.note{font-size:12px;line-height:1.5;margin-top:20px}
-.hidden{display:none}
+
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.tab {
+  flex: 1;
+  padding: 15px 8px;
+  border: 0;
+  border-radius: 30px;
+  background: #f4e4ec;
+  color: #84365f;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: #a83270;
+  color: white;
+}
+
+label {
+  display: block;
+  margin: 20px 0 9px;
+  font-size: 16px;
+}
+
+input {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #e5cbd9;
+  border-radius: 15px;
+  font-size: 16px;
+  outline: none;
+  background: white;
+}
+
+input:focus {
+  border-color: #a83270;
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 20px 0;
+  line-height: 1.5;
+}
+
+.check input {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.submit {
+  width: 100%;
+  padding: 17px;
+  margin-top: 22px;
+  background: #a83270;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit:active, .tab:active {
+  opacity: .8;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.note {
+  text-align: center;
+  color: #806b7d;
+  line-height: 1.7;
+  margin-top: 28px;
+  font-size: 14px;
+}
+
+.switch {
+  text-align: center;
+  margin-top: 24px;
+  color: #806b7d;
+}
+
+.switch button {
+  color: #a83270;
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #806b7d;
+  font-size: 14px;
+}
+
+@media(max-width:480px) {
+  main {
+    margin: 15px auto;
+    padding: 12px;
+  }
+
+  .card {
+    padding: 25px 20px;
+  }
+
+  h1 {
+    font-size: 31px;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <header>HerCircle ♡</header>
+
 <main>
 <div class="card">
+
 <h1>Find Your People 💗</h1>
-<p>Your life. Your choices. Your circle.</p>
+
+<p class="tagline">
+Your life. Your choices. Your circle.
+</p>
 
 <div class="tabs">
-<button id="signupTab" class="active" onclick="showForm('signup')">Sign Up</button>
-<button id="loginTab" onclick="showForm('login')">Log In</button>
+<button class="tab active" id="signupTab"
+onclick="showPage('signup')">Sign Up</button>
+
+<button class="tab" id="loginTab"
+onclick="showPage('login')">Log In</button>
 </div>
 
-<form id="signup" onsubmit="demo(event)">
+<!-- SIGN UP -->
+
+<form id="signup" onsubmit="demo(event,'signup')">
+
 <label>Your name</label>
 <input type="text" placeholder="Enter your name" required>
 
@@ -77,7 +212,8 @@ input{
 <input type="email" placeholder="Enter your email" required>
 
 <label>Create password</label>
-<input type="password" placeholder="At least 8 characters" minlength="8" required>
+<input type="password" placeholder="At least 8 characters"
+minlength="8" required>
 
 <label>Your city</label>
 <input type="text" placeholder="e.g. Ranchi" required>
@@ -92,38 +228,160 @@ input{
 <span>I agree to the community guidelines and privacy policy.</span>
 </div>
 
-<button class="submit">Create Account</button>
+<button class="submit" type="submit">
+Create Account
+</button>
+
 </form>
 
-<form id="login" class="hidden" onsubmit="demo(event)">
+<!-- LOGIN -->
+
+<div id="login" class="hidden">
+
+<div class="tabs">
+<button class="tab active" id="passwordTab"
+onclick="showMethod('password')">
+Password
+</button>
+
+<button class="tab" id="otpTab"
+onclick="showMethod('otp')">
+OTP
+</button>
+</div>
+
+<!-- PASSWORD LOGIN -->
+
+<form id="passwordForm" onsubmit="demo(event,'password')">
+
 <label>Email address</label>
 <input type="email" placeholder="Enter your email" required>
 
 <label>Password</label>
 <input type="password" placeholder="Enter your password" required>
 
-<button class="submit">Log In</button>
+<button class="submit" type="submit">
+Log In
+</button>
+
 </form>
 
+<!-- OTP LOGIN -->
+
+<form id="otpForm" class="hidden"
+onsubmit="demo(event,'otp')">
+
+<label>Email address or mobile number</label>
+<input id="contact" type="text"
+placeholder="Enter email or mobile number" required>
+
+<button class="submit" type="button" onclick="sendOtp()">
+Send OTP
+</button>
+
+<div id="otpSection" class="hidden">
+
+<label>Enter 6-digit OTP</label>
+<input type="text" id="otpCode"
+inputmode="numeric" maxlength="6"
+pattern="[0-9]{6}" placeholder="Enter OTP">
+
+<button class="submit" type="submit">
+Verify OTP & Log In
+</button>
+
+</div>
+
+</form>
+
+</div>
+
 <p class="note">
-Your personal journey is yours to share. Marital status is not required.
-<br><br>
-This is an early visual demo. No account or password is created or stored yet.
+Your personal journey is yours to share.
+Marital status is not required.
 </p>
+
+<p class="note">
+A welcoming friendship community for adult single women.
+</p>
+
 </div>
 </main>
 
+<footer>
+HerCircle ♡
+<br>
+A place to belong, exactly as you are.
+<br><br>
+© 2026 HerCircle
+</footer>
+
 <script>
-function showForm(type){
-  document.getElementById('signup').classList.toggle('hidden',type!=='signup');
-  document.getElementById('login').classList.toggle('hidden',type!=='login');
-  document.getElementById('signupTab').classList.toggle('active',type==='signup');
-  document.getElementById('loginTab').classList.toggle('active',type==='login');
+
+function showPage(page) {
+
+  document.getElementById('signup').classList.toggle(
+    'hidden', page !== 'signup'
+  );
+
+  document.getElementById('login').classList.toggle(
+    'hidden', page !== 'login'
+  );
+
+  document.getElementById('signupTab').classList.toggle(
+    'active', page === 'signup'
+  );
+
+  document.getElementById('loginTab').classList.toggle(
+    'active', page === 'login'
+  );
 }
-function demo(event){
+
+function showMethod(method) {
+
+  document.getElementById('passwordForm').classList.toggle(
+    'hidden', method !== 'password'
+  );
+
+  document.getElementById('otpForm').classList.toggle(
+    'hidden', method !== 'otp'
+  );
+
+  document.getElementById('passwordTab').classList.toggle(
+    'active', method === 'password'
+  );
+
+  document.getElementById('otpTab').classList.toggle(
+    'active', method === 'otp'
+  );
+}
+
+function sendOtp() {
+
+  const contact = document.getElementById('contact').value.trim();
+
+  if (!contact) {
+    alert('Please enter your email or mobile number.');
+    return;
+  }
+
+  document.getElementById('otpSection').classList.remove('hidden');
+
+  alert('Demo only: OTP delivery is not connected yet.');
+}
+
+function demo(event, type) {
+
   event.preventDefault();
-  alert('Thank you! HerCircle registration will be available soon.');
+
+  if (type === 'otp') {
+    alert('OTP verification backend is not connected yet.');
+  } else {
+    alert('Account authentication is not connected yet.');
+  }
 }
+
 </script>
+
 </body>
 </html>
