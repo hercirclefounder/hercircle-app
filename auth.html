@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HerCircle | Join Us</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#fff4f5;
+  color:#39243a;
+}
+header{
+  background:white;
+  padding:20px;
+  color:#b52c70;
+  font-size:25px;
+  font-weight:bold;
+}
+main{
+  max-width:440px;
+  margin:35px auto;
+  padding:25px;
+}
+.card{
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 5px 20px #00000010;
+}
+h1{text-align:center;color:#a52a68}
+p{text-align:center;color:#766477}
+.tabs{display:flex;gap:10px;margin:25px 0}
+.tabs button{
+  flex:1;padding:12px;border:0;
+  border-radius:25px;background:#f6e3ed;
+  color:#87345e;font-weight:bold;
+}
+.tabs button.active{background:#b52c70;color:white}
+label{display:block;margin:15px 0 6px;font-size:14px}
+input{
+  width:100%;padding:13px;
+  border:1px solid #e5cbd8;
+  border-radius:10px;font-size:16px;
+}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:13px;margin:18px 0}
+.check input{width:auto;margin-top:2px}
+.submit{
+  width:100%;padding:14px;border:0;
+  border-radius:25px;background:#b52c70;
+  color:white;font-size:16px;font-weight:bold;
+}
+.note{font-size:12px;line-height:1.5;margin-top:20px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header>HerCircle ♡</header>
+<main>
+<div class="card">
+<h1>Find Your People 💗</h1>
+<p>Your life. Your choices. Your circle.</p>
+
+<div class="tabs">
+<button id="signupTab" class="active" onclick="showForm('signup')">Sign Up</button>
+<button id="loginTab" onclick="showForm('login')">Log In</button>
+</div>
+
+<form id="signup" onsubmit="demo(event)">
+<label>Your name</label>
+<input type="text" placeholder="Enter your name" required>
+
+<label>Email address</label>
+<input type="email" placeholder="Enter your email" required>
+
+<label>Create password</label>
+<input type="password" placeholder="At least 8 characters" minlength="8" required>
+
+<label>Your city</label>
+<input type="text" placeholder="e.g. Ranchi" required>
+
+<div class="check">
+<input type="checkbox" required>
+<span>I confirm that I am 18 years or older.</span>
+</div>
+
+<div class="check">
+<input type="checkbox" required>
+<span>I agree to the community guidelines and privacy policy.</span>
+</div>
+
+<button class="submit">Create Account</button>
+</form>
+
+<form id="login" class="hidden" onsubmit="demo(event)">
+<label>Email address</label>
+<input type="email" placeholder="Enter your email" required>
+
+<label>Password</label>
+<input type="password" placeholder="Enter your password" required>
+
+<button class="submit">Log In</button>
+</form>
+
+<p class="note">
+Your personal journey is yours to share. Marital status is not required.
+<br><br>
+This is an early visual demo. No account or password is created or stored yet.
+</p>
+</div>
+</main>
+
+<script>
+function showForm(type){
+  document.getElementById('signup').classList.toggle('hidden',type!=='signup');
+  document.getElementById('login').classList.toggle('hidden',type!=='login');
+  document.getElementById('signupTab').classList.toggle('active',type==='signup');
+  document.getElementById('loginTab').classList.toggle('active',type==='login');
+}
+function demo(event){
+  event.preventDefault();
+  alert('Thank you! HerCircle registration will be available soon.');
+}
+</script>
+</body>
+</html>
