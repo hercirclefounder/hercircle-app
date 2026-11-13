@@ -2,386 +2,482 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HerCircle | Join Us</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HerCircle | Find Your People</title>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #fff4f7;
-  color: #39243a;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-header {
-  background: white;
-  padding: 22px;
-  color: #a83270;
-  font-size: 25px;
-  font-weight: bold;
-  text-align: center;
-}
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff4f8;
+      color: #39243a;
+      min-height: 100vh;
+      padding: 25px 15px;
+    }
 
-main {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 20px;
-}
+    .container {
+      max-width: 520px;
+      margin: 25px auto;
+      background: white;
+      padding: 35px 28px;
+      border-radius: 28px;
+      box-shadow: 0 12px 40px rgba(120, 50, 85, 0.08);
+    }
 
-.card {
-  background: white;
-  padding: 30px 24px;
-  border-radius: 28px;
-  box-shadow: 0 8px 30px rgba(100,40,70,.06);
-}
+    .brand {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-h1 {
-  text-align: center;
-  color: #a83270;
-  font-size: 36px;
-  margin: 10px 0;
-}
+    .brand h1 {
+      color: #a83270;
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
 
-.tagline {
-  text-align: center;
-  color: #806b7d;
-  margin: 20px 0 30px;
-  line-height: 1.6;
-}
+    .heart {
+      font-size: 32px;
+    }
 
-.tabs {
-  display: flex;
-  gap: 12px;
-  margin: 24px 0;
-}
+    .tagline {
+      color: #806b80;
+      font-size: 17px;
+      line-height: 1.5;
+      margin-top: 12px;
+    }
 
-.tab {
-  flex: 1;
-  padding: 15px 8px;
-  border: 0;
-  border-radius: 30px;
-  background: #f4e4ec;
-  color: #84365f;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin: 28px 0 22px;
+    }
 
-.tab.active {
-  background: #a83270;
-  color: white;
-}
+    .tab {
+      flex: 1;
+      border: none;
+      border-radius: 30px;
+      padding: 14px 8px;
+      background: #f4e4ed;
+      color: #814263;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-label {
-  display: block;
-  margin: 20px 0 9px;
-  font-size: 16px;
-}
+    .tab.active {
+      background: #a83270;
+      color: white;
+    }
 
-input {
-  width: 100%;
-  padding: 16px;
-  border: 1px solid #e5cbd9;
-  border-radius: 15px;
-  font-size: 16px;
-  outline: none;
-  background: white;
-}
+    .form {
+      display: none;
+    }
 
-input:focus {
-  border-color: #a83270;
-}
+    .form.active {
+      display: block;
+    }
 
-.check {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin: 20px 0;
-  line-height: 1.5;
-}
+    label {
+      display: block;
+      font-size: 15px;
+      margin: 17px 0 8px;
+      font-weight: 600;
+    }
 
-.check input {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 1.5px solid #e5cbd9;
+      border-radius: 13px;
+      font-size: 16px;
+      outline: none;
+      background: #fff;
+    }
 
-.submit {
-  width: 100%;
-  padding: 17px;
-  margin-top: 22px;
-  background: #a83270;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    input:focus {
+      border-color: #a83270;
+    }
 
-.submit:active, .tab:active {
-  opacity: .8;
-}
+    .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 18px 0;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #665466;
+    }
 
-.hidden {
-  display: none !important;
-}
+    .check input {
+      width: 17px;
+      height: 17px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
 
-.note {
-  text-align: center;
-  color: #806b7d;
-  line-height: 1.7;
-  margin-top: 28px;
-  font-size: 14px;
-}
+    .submit {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 30px;
+      background: #a83270;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
 
-.switch {
-  text-align: center;
-  margin-top: 24px;
-  color: #806b7d;
-}
+    .submit:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
 
-.switch button {
-  color: #a83270;
-  background: none;
-  border: none;
-  font-weight: bold;
-  font-size: 15px;
-  cursor: pointer;
-}
+    .message {
+      display: none;
+      padding: 13px;
+      margin-top: 18px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+      background: #f8eaf1;
+      color: #713452;
+      overflow-wrap: anywhere;
+    }
 
-footer {
-  text-align: center;
-  padding: 25px;
-  color: #806b7d;
-  font-size: 14px;
-}
+    .message.show {
+      display: block;
+    }
 
-@media(max-width:480px) {
-  main {
-    margin: 15px auto;
-    padding: 12px;
-  }
+    .note {
+      text-align: center;
+      color: #806b80;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-top: 28px;
+    }
 
-  .card {
-    padding: 25px 20px;
-  }
+    .hidden {
+      display: none !important;
+    }
 
-  h1 {
-    font-size: 31px;
-  }
-}
-</style>
+    .welcome {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .welcome h2 {
+      color: #a83270;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        padding: 28px 20px;
+      }
+
+      .brand h1 {
+        font-size: 30px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>HerCircle ♡</header>
+  <main class="container">
 
-<main>
-<div class="card">
+    <div class="brand">
+      <h1>Find Your People <span class="heart">💗</span></h1>
+      <p class="tagline">Your life. Your choices. Your circle.</p>
+    </div>
 
-<h1>Find Your People 💗</h1>
+    <div id="authArea">
 
-<p class="tagline">
-Your life. Your choices. Your circle.
-</p>
+      <div class="tabs">
+        <button class="tab active" id="signupTab" type="button"
+          onclick="showForm('signup')">Sign Up</button>
 
-<div class="tabs">
-<button class="tab active" id="signupTab"
-onclick="showPage('signup')">Sign Up</button>
+        <button class="tab" id="loginTab" type="button"
+          onclick="showForm('login')">Log In</button>
 
-<button class="tab" id="loginTab"
-onclick="showPage('login')">Log In</button>
-</div>
+        <button class="tab" id="otpTab" type="button"
+          onclick="showForm('otp')">OTP</button>
+      </div>
 
-<!-- SIGN UP -->
+      <!-- SIGN UP -->
+      <form class="form active" id="signupForm">
 
-<form id="signup" onsubmit="demo(event,'signup')">
+        <label for="fullName">Your name</label>
+        <input id="fullName" type="text"
+          placeholder="Enter your name" required>
 
-<label>Your name</label>
-<input type="text" placeholder="Enter your name" required>
+        <label for="signupEmail">Email address</label>
+        <input id="signupEmail" type="email"
+          placeholder="Enter your email" required>
 
-<label>Email address</label>
-<input type="email" placeholder="Enter your email" required>
+        <label for="signupPassword">Create password</label>
+        <input id="signupPassword" type="password"
+          placeholder="At least 8 characters"
+          minlength="8" required>
 
-<label>Create password</label>
-<input type="password" placeholder="At least 8 characters"
-minlength="8" required>
+        <label for="city">Your city</label>
+        <input id="city" type="text"
+          placeholder="e.g. Ranchi" required>
 
-<label>Your city</label>
-<input type="text" placeholder="e.g. Ranchi" required>
+        <div class="check">
+          <input type="checkbox" id="ageCheck" required>
+          <span>I confirm that I am 18 years or older.</span>
+        </div>
 
-<div class="check">
-<input type="checkbox" required>
-<span>I confirm that I am 18 years or older.</span>
-</div>
+        <div class="check">
+          <input type="checkbox" id="termsCheck" required>
+          <span>I agree to the community guidelines and privacy policy.</span>
+        </div>
 
-<div class="check">
-<input type="checkbox" required>
-<span>I agree to the community guidelines and privacy policy.</span>
-</div>
+        <button class="submit" type="submit">
+          Create Account
+        </button>
+      </form>
 
-<button class="submit" type="submit">
-Create Account
-</button>
+      <!-- LOGIN -->
+      <form class="form" id="loginForm">
 
-</form>
+        <label for="loginEmail">Email address</label>
+        <input id="loginEmail" type="email"
+          placeholder="Enter your email" required>
 
-<!-- LOGIN -->
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password"
+          placeholder="Enter your password" required>
 
-<div id="login" class="hidden">
+        <button class="submit" type="submit">
+          Log In
+        </button>
+      </form>
 
-<div class="tabs">
-<button class="tab active" id="passwordTab"
-onclick="showMethod('password')">
-Password
-</button>
+      <!-- OTP -->
+      <form class="form" id="otpForm">
 
-<button class="tab" id="otpTab"
-onclick="showMethod('otp')">
-OTP
-</button>
-</div>
+        <label for="otpEmail">Email address</label>
+        <input id="otpEmail" type="email"
+          placeholder="Enter your registered email" required>
 
-<!-- PASSWORD LOGIN -->
+        <button class="submit" type="submit">
+          Send Sign-in Link
+        </button>
 
-<form id="passwordForm" onsubmit="demo(event,'password')">
+        <p class="note">
+          We will send you a one-time sign-in link by email.
+        </p>
+      </form>
 
-<label>Email address</label>
-<input type="email" placeholder="Enter your email" required>
+      <div id="message" class="message" role="status"
+        aria-live="polite"></div>
 
-<label>Password</label>
-<input type="password" placeholder="Enter your password" required>
+      <p class="note">
+        Your personal journey is yours to share.
+        Marital status is not required.
+      </p>
 
-<button class="submit" type="submit">
-Log In
-</button>
+    </div>
 
-</form>
+    <!-- LOGGED-IN SCREEN -->
+    <div id="welcomeArea" class="welcome hidden">
+      <h2>Welcome to HerCircle! 💗</h2>
+      <p id="welcomeText">You are signed in.</p>
+      <button class="submit" type="button" onclick="logout()">
+        Log Out
+      </button>
+    </div>
 
-<!-- OTP LOGIN -->
+  </main>
 
-<form id="otpForm" class="hidden"
-onsubmit="demo(event,'otp')">
+  <script>
+    // SUPABASE CONNECTION
+    const SUPABASE_URL =
+      "https://ugxjqhejxpwqcyfpnabj.supabase.co";
 
-<label>Email address or mobile number</label>
-<input id="contact" type="text"
-placeholder="Enter email or mobile number" required>
+    const SUPABASE_ANON_KEY =
+      "sb_publishable_VxPyPcDJYFoq8FbhbBKi7g_EQA-3o_g";
 
-<button class="submit" type="button" onclick="sendOtp()">
-Send OTP
-</button>
+    const client = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
 
-<div id="otpSection" class="hidden">
+    const redirectUrl = window.location.href.split("?")[0];
 
-<label>Enter 6-digit OTP</label>
-<input type="text" id="otpCode"
-inputmode="numeric" maxlength="6"
-pattern="[0-9]{6}" placeholder="Enter OTP">
+    function showMessage(text) {
+      const box = document.getElementById("message");
+      box.textContent = text;
+      box.classList.add("show");
+    }
 
-<button class="submit" type="submit">
-Verify OTP & Log In
-</button>
+    function showForm(name) {
+      document.querySelectorAll(".form").forEach(form => {
+        form.classList.remove("active");
+      });
 
-</div>
+      document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.remove("active");
+      });
 
-</form>
+      document.getElementById(name + "Form").classList.add("active");
+      document.getElementById(name + "Tab").classList.add("active");
 
-</div>
+      document.getElementById("message").classList.remove("show");
+    }
 
-<p class="note">
-Your personal journey is yours to share.
-Marital status is not required.
-</p>
+    function setLoading(form, loading) {
+      const button = form.querySelector("button[type='submit']");
+      button.disabled = loading;
+      button.textContent = loading ? "Please wait..." :
+        (form.id === "signupForm" ? "Create Account" :
+        form.id === "loginForm" ? "Log In" : "Send Sign-in Link");
+    }
 
-<p class="note">
-A welcoming friendship community for adult single women.
-</p>
+    // SIGN UP
+    document.getElementById("signupForm")
+      .addEventListener("submit", async function(event) {
 
-</div>
-</main>
+      event.preventDefault();
+      const form = this;
+      setLoading(form, true);
 
-<footer>
-HerCircle ♡
-<br>
-A place to belong, exactly as you are.
-<br><br>
-© 2026 HerCircle
-</footer>
+      const name = document.getElementById("fullName").value.trim();
+      const email = document.getElementById("signupEmail").value.trim();
+      const password = document.getElementById("signupPassword").value;
+      const city = document.getElementById("city").value.trim();
 
-<script>
+      try {
+        const { data, error } = await client.auth.signUp({
+          email: email,
+          password: password,
+          options: {
+            data: {
+              full_name: name,
+              city: city
+            },
+            emailRedirectTo: redirectUrl
+          }
+        });
 
-function showPage(page) {
+        if (error) throw error;
 
-  document.getElementById('signup').classList.toggle(
-    'hidden', page !== 'signup'
-  );
+        showMessage(
+          "Account registration submitted! Please check your email " +
+          "and confirm your email address before logging in."
+        );
 
-  document.getElementById('login').classList.toggle(
-    'hidden', page !== 'login'
-  );
+        form.reset();
 
-  document.getElementById('signupTab').classList.toggle(
-    'active', page === 'signup'
-  );
+      } catch (error) {
+        showMessage(error.message);
+      } finally {
+        setLoading(form, false);
+      }
+    });
 
-  document.getElementById('loginTab').classList.toggle(
-    'active', page === 'login'
-  );
-}
+    // PASSWORD LOGIN
+    document.getElementById("loginForm")
+      .addEventListener("submit", async function(event) {
 
-function showMethod(method) {
+      event.preventDefault();
+      const form = this;
+      setLoading(form, true);
 
-  document.getElementById('passwordForm').classList.toggle(
-    'hidden', method !== 'password'
-  );
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
 
-  document.getElementById('otpForm').classList.toggle(
-    'hidden', method !== 'otp'
-  );
+      try {
+        const { data, error } = await client.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
 
-  document.getElementById('passwordTab').classList.toggle(
-    'active', method === 'password'
-  );
+        if (error) throw error;
 
-  document.getElementById('otpTab').classList.toggle(
-    'active', method === 'otp'
-  );
-}
+        showMessage("Login successful!");
 
-function sendOtp() {
+      } catch (error) {
+        showMessage(error.message);
+      } finally {
+        setLoading(form, false);
+      }
+    });
 
-  const contact = document.getElementById('contact').value.trim();
+    // EMAIL OTP / MAGIC LINK
+    document.getElementById("otpForm")
+      .addEventListener("submit", async function(event) {
 
-  if (!contact) {
-    alert('Please enter your email or mobile number.');
-    return;
-  }
+      event.preventDefault();
+      const form = this;
+      setLoading(form, true);
 
-  document.getElementById('otpSection').classList.remove('hidden');
+      const email = document.getElementById("otpEmail").value.trim();
 
-  alert('Demo only: OTP delivery is not connected yet.');
-}
+      try {
+        const { error } = await client.auth.signInWithOtp({
+          email: email,
+          options: {
+            shouldCreateUser: false,
+            emailRedirectTo: redirectUrl
+          }
+        });
 
-function demo(event, type) {
+        if (error) throw error;
 
-  event.preventDefault();
+        showMessage(
+          "Sign-in link sent! Check your email and open the link to log in."
+        );
 
-  if (type === 'otp') {
-    alert('OTP verification backend is not connected yet.');
-  } else {
-    alert('Account authentication is not connected yet.');
-  }
-}
+      } catch (error) {
+        showMessage(error.message);
+      } finally {
+        setLoading(form, false);
+      }
+    });
 
-</script>
+    // SHOW LOGGED-IN USER
+    function showWelcome(user) {
+      document.getElementById("authArea").classList.add("hidden");
+      document.getElementById("welcomeArea").classList.remove("hidden");
+
+      const name = user.user_metadata?.full_name || user.email;
+      document.getElementById("welcomeText").textContent =
+        "Welcome, " + name + ". Your HerCircle account is connected.";
+    }
+
+    client.auth.onAuthStateChange((event, session) => {
+      if (session?.user) {
+        showWelcome(session.user);
+      } else {
+        document.getElementById("authArea").classList.remove("hidden");
+        document.getElementById("welcomeArea").classList.add("hidden");
+      }
+    });
+
+    // LOG OUT
+    async function logout() {
+      const { error } = await client.auth.signOut();
+
+      if (error) {
+        showMessage(error.message);
+      } else {
+        showForm("login");
+        showMessage("You have logged out.");
+      }
+    }
+  </script>
 
 </body>
 </html>
