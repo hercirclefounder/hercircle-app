@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fffaf7">
+<title>Create your LAIMAŹ profile</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--ink:#241a24;--muted:#766a75;--paper:#fffaf7;--rose:#b85c70;--dark:#8f4057;--line:#eadbd5;--soft:#f8ece9}
+*{box-sizing:border-box}body{margin:0;padding:24px 14px 48px;background:linear-gradient(145deg,#fffaf7,#f5e8e6);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:650px;margin:20px auto;background:#fff;border:1px solid var(--line);border-radius:26px;padding:clamp(22px,5vw,42px);box-shadow:0 18px 55px #56334212}
+.brand{text-align:center;font:700 27px Georgia,serif;letter-spacing:.08em;color:var(--dark)}.eyebrow{text-align:center;color:var(--dark);font-size:11px;font-weight:750;letter-spacing:.18em;text-transform:uppercase;margin-top:26px}
+h1{text-align:center;font:500 clamp(32px,6vw,43px)/1.12 Georgia,serif;margin:12px 0}.intro{text-align:center;color:var(--muted);line-height:1.65;max-width:490px;margin:0 auto 28px;font-size:15px}
+label,.legend{display:block;font-size:14px;font-weight:700;margin:19px 0 8px}input,textarea,select{width:100%;border:1px solid #dfcbd0;border-radius:12px;padding:14px 15px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}textarea{min-height:110px;resize:vertical}input:focus,textarea:focus,select:focus{outline:2px solid #e6bdc6;border-color:var(--rose)}
+.hint{font-size:12px;color:var(--muted);line-height:1.5;margin-top:6px}.choices{display:flex;flex-wrap:wrap;gap:9px}.choice{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:9px 12px;font-size:13px;color:#594b56}.choice input{width:auto;margin:0;accent-color:var(--dark)}
+.actions{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}.btn{border:0;border-radius:999px;padding:14px 20px;background:var(--dark);color:white;font-weight:700;font-size:15px;cursor:pointer}.btn:disabled{opacity:.6}.secondary{background:white;color:var(--dark);border:1px solid #d9bbc2}
+.message{display:none;margin-top:18px;padding:13px 15px;border-radius:12px;background:var(--soft);color:#713b50;line-height:1.5;font-size:14px}.message.show{display:block}
+.privacy{border-top:1px solid var(--line);margin-top:26px;padding-top:17px;color:var(--muted);font-size:12px;line-height:1.6}.hidden{display:none!important}
+@media(max-width:480px){main{margin:0 auto;border-radius:20px}.actions .btn{width:100%}}
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">LAIMAŹ ♡</div>
+  <div class="eyebrow">A little about you</div>
+  <h1>Let your story begin.</h1>
+  <p class="intro">A thoughtful profile helps people see the person behind the pictures. Share only what you're comfortable sharing.</p>
+  <form id="profileForm">
+    <label for="displayName">What should we call you?</label>
+    <input id="displayName" name="displayName" maxlength="50" autocomplete="name" required placeholder="Your first name or display name">
+    <label for="city">Which city are you in?</label>
+    <input id="city" name="city" maxlength="60" autocomplete="address-level2" required placeholder="e.g. Ranchi">
+    <p class="hint">Your exact address or live location is never requested here.</p>
+    <label for="ageBand">Your age range</label>
+    <select id="ageBand" name="ageBand" required>
+      <option value="">Choose your age range</option>
+      <option value="18–21">18–21</option><option value="22–25">22–25</option><option value="26–29">26–29</option><option value="30–35">30–35</option><option value="36+">36+</option>
+    </select>
+    <p class="hint">LAIMAŹ is intended for adults aged 18 and above. This age range is profile information, not identity or age verification.</p>
+    <label for="about">A little about you</label>
+    <textarea id="about" name="about" maxlength="350" placeholder="What do you enjoy? What matters to you? (Up to 350 characters)"></textarea>
+    <p class="hint"><span id="count">0</span>/350 characters</p>
+    <div class="legend">What do you enjoy? Choose up to 5.</div>
+    <div class="choices" id="interests">
+      <label class="choice"><input type="checkbox" value="Travel"> Travel</label>
+      <label class="choice"><input type="checkbox" value="Books"> Books</label>
+      <label class="choice"><input type="checkbox" value="Music"> Music</label>
+      <label class="choice"><input type="checkbox" value="Food"> Food</label>
+      <label class="choice"><input type="checkbox" value="Fitness"> Fitness</label>
+      <label class="choice"><input type="checkbox" value="Nature"> Nature</label>
+      <label class="choice"><input type="checkbox" value="Movies"> Movies</label>
+      <label class="choice"><input type="checkbox" value="Art"> Art</label>
+      <label class="choice"><input type="checkbox" value="Learning"> Learning</label>
+      <label class="choice"><input type="checkbox" value="Culture"> Culture</label>
+    </div>
+    <label for="intent">What are you hoping to find?</label>
+    <select id="intent" name="intent" required>
+      <option value="">Choose what feels right</option>
+      <option value="A meaningful relationship">A meaningful relationship</option>
+      <option value="Dating with marriage in mind">Dating with marriage in mind</option>
+      <option value="Open to seeing where a genuine connection leads">Open to seeing where a genuine connection leads</option>
+    </select>
+    <div class="actions">
+      <button class="btn" id="saveBtn" type="submit">Save my private draft</button>
+      <a class="btn secondary" href="index.html">Back to home</a>
+    </div>
+    <div class="message" id="message" role="status" aria-live="polite"></div>
+  </form>
+  <div class="privacy">Privacy note: this first version saves a private draft in your signed-in account metadata. It does not publish your profile, show you to other members, upload photos or enable matching. Those features will be added only after the database access rules and privacy controls are reviewed.</div>
+</main>
+<script>
+const SUPABASE_URL="https://ugxjqhejxpwgcyfpnabj.supabase.co";
+const SUPABASE_ANON_KEY="sb_publishable_VxPyPcDJYFoq8FbhbBKi7g_EQA-3o_g";
+const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+const form=document.getElementById("profileForm"),message=document.getElementById("message"),saveBtn=document.getElementById("saveBtn"),about=document.getElementById("about");
+function show(text){message.textContent=text;message.classList.add("show")}
+about.addEventListener("input",()=>document.getElementById("count").textContent=about.value.length);
+(async()=>{
+ const {data,error}=await client.auth.getSession();
+ if(error||!data.session){show("Please log in to your LAIMAŹ account first. Then open this page again.");form.querySelectorAll("input,textarea,select,button").forEach(el=>el.disabled=true);return}
+ const u=data.session.user,meta=u.user_metadata||{};
+ const draft=meta.dating_profile_draft||{};
+ document.getElementById("displayName").value=draft.display_name||meta.full_name||"";
+ document.getElementById("city").value=draft.city||meta.city||"";
+ document.getElementById("ageBand").value=draft.age_range||"";
+ about.value=draft.about||"";document.getElementById("count").textContent=about.value.length;
+ document.getElementById("intent").value=draft.relationship_intention||"";
+ document.querySelectorAll('#interests input').forEach(el=>el.checked=(draft.interests||[]).includes(el.value));
+})();
+form.addEventListener("submit",async event=>{
+ event.preventDefault();
+ const selected=[...document.querySelectorAll('#interests input:checked')].map(el=>el.value);
+ if(selected.length>5){show("Please choose no more than five interests.");return}
+ const age=document.getElementById("ageBand").value;
+ if(!age){show("Please choose your age range.");return}
+ saveBtn.disabled=true;saveBtn.textContent="Saving...";
+ try{
+  const {data,error:sessionError}=await client.auth.getSession();
+  if(sessionError||!data.session)throw new Error("Your session has expired. Please log in again.");
+  const draft={
+   display_name:document.getElementById("displayName").value.trim(),
+   city:document.getElementById("city").value.trim(),
+   age_range:age,
+   about:about.value.trim(),
+   interests:selected,
+   relationship_intention:document.getElementById("intent").value,
+   draft_updated_at:new Date().toISOString()
+  };
+  const {error}=await client.auth.updateUser({data:{dating_profile_draft:draft}});
+  if(error)throw error;
+  show("Your private profile draft has been saved to your account. It is not visible to other members yet.");
+ }catch(err){show(err.message||"We couldn't save your draft. Please try again.")}
+ finally{saveBtn.disabled=false;saveBtn.textContent="Save my private draft"}
+});
+</script>
+</body>
+</html>
