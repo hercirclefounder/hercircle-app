@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HerCircle | Find Your People</title>
+  <title>LAIMAŹ | Where dating finds direction</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -196,8 +196,8 @@
   <main class="container">
 
     <div class="brand">
-      <h1>Find Your People <span class="heart">💗</span></h1>
-      <p class="tagline">Your life. Your choices. Your circle.</p>
+      <h1>LAIMAŹ <span class="heart">♡</span></h1>
+      <p class="tagline">Where dating finds direction.</p>
     </div>
 
     <div id="authArea">
@@ -284,15 +284,14 @@
         aria-live="polite"></div>
 
       <p class="note">
-        Your personal journey is yours to share.
-        Marital status is not required.
+        Your story is yours to share. Take your time and connect with intention.
       </p>
 
     </div>
 
     <!-- LOGGED-IN SCREEN -->
     <div id="welcomeArea" class="welcome hidden">
-      <h2>Welcome to HerCircle! 💗</h2>
+      <h2>Welcome to LAIMAŹ!</h2>
       <p id="welcomeText">You are signed in.</p>
       <button class="submit" type="button" onclick="logout()">
         Log Out
@@ -313,7 +312,7 @@
       SUPABASE_ANON_KEY
     );
 
-    const redirectUrl = "https://hercirclefounder.github.io/hercircle-app/";
+    const redirectUrl = "https://hercirclefounder.github.io/hercircle-app/auth.html";
 
     function showMessage(text) {
       const box = document.getElementById("message");
@@ -453,7 +452,7 @@
 
       const name = user.user_metadata?.full_name || user.email;
       document.getElementById("welcomeText").textContent =
-        "Welcome, " + name + ". Your HerCircle account is connected.";
+        "Welcome, " + name + ". Your LAIMAŹ account is connected.";
     }
 
     client.auth.onAuthStateChange((event, session) => {
